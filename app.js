@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const { graphqlHTTP } = require("express-graphql");
 //generates schema
 const { buildSchema } = require("graphql");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -58,5 +59,16 @@ app.use(
     graphiql: true,
   })
 );
-//sets port
-app.listen(3000);
+
+//Get this from mongodb atlas => Database => Connect
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.eq0fa.mongodb.net/?retryWrites=true&w=majority`
+  )
+  .then(() =>
+    //starts server at port 3000
+    app.listen(3000)
+  )
+  .catch((err) => {
+    console.log(err);
+  });
