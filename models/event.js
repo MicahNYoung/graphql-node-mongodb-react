@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
-  tite: {
+  title: {
     type: String,
     required: true,
   },
@@ -20,3 +20,6 @@ const eventSchema = new Schema({
     required: true,
   },
 });
+
+//creating models
+module.exports = mongoose.model("Event", eventSchema);
